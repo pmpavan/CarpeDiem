@@ -32,3 +32,4 @@ proguard/
 */project.properties
 *~
 .DS_Store
+/.metadat.*
