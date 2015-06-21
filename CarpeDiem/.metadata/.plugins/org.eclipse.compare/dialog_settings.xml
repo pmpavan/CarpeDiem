@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="PatchWizard">
+		<item value="1" key="PatchWizardPage1.INPUT_METHOD"/>
+		<item value="817" key="DIALOG_WIDTH"/>
+		<item value="335" key="DIALOG_Y_ORIGIN"/>
+		<item value="721" key="DIALOG_HEIGHT"/>
+		<item value="1045" key="DIALOG_X_ORIGIN"/>
+		<item value="" key="PatchWizardPage1.WORKSPACE_PATH"/>
+		<item value="" key="PatchWizardPage1.PATCH_FILES"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<list key="PatchWizardPage1.PATCH_URLS">
+			<item value=""/>
+		</list>
+		<list key="PatchWizardPage1.PATCH_FILES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="PreviewPatchPage">
+		<item value="false" key="generateRejects"/>
+		<item value="true" key="expandPatchOptions"/>
+	</section>
+</section>

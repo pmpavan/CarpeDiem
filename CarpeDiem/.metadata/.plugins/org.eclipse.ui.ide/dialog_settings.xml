@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="com.android.ide.eclipse.adt.package.feature:23.0.2.1259578"/>
+		<item value="com.crashlytics.tools.eclipse:2.2.1"/>
+		<item value="org.eclipse.cdt.gdb:7.0.0.201202111925"/>
+		<item value="org.eclipse.cdt:8.0.2.201202111925"/>
+		<item value="org.eclipse.egit.mylyn:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.egit.source:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.egit:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.emf.common:2.10.1.v20150123-0348"/>
+		<item value="org.eclipse.emf.ecore:2.10.2.v20150123-0348"/>
+		<item value="org.eclipse.help:2.0.103.v20150204-1700"/>
+		<item value="org.eclipse.jgit.http.apache:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.jgit.pgm:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.jgit:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.mylyn.commons.identity:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons.notifications:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons.repositories:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons:3.14.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.context_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn.discovery:3.14.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.monitor:3.14.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.team_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn_feature:3.14.2.v20150217-2341"/>
+		<item value="org.eclipse.platform:4.4.2.v20150204-1700"/>
+		<item value="org.eclipse.rcp:4.4.2.v20150204-1700"/>
+	</list>
+</section>
