@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.crusader.carpediem.appwatcher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/action_bar_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/mnu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/action_selector"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_back" />
+
+        <com.crusader.carpediem.appwatcher.views.MonkTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="SETTINGS"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:typeface="opensans_regular" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp" >
+
+            <ImageView
+                android:id="@+id/slider_incognito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/slide_off" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/slider_incognito"
+                android:orientation="vertical" >
+
+                <com.crusader.carpediem.appwatcher.views.MonkTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Escape Mode"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:typeface="opensans_semibold" />
+
+                <com.crusader.carpediem.appwatcher.views.MonkTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tell me if you want me to stop monitoring"
+                    android:textColor="@color/drak_green"
+                    android:textSize="12sp"
+                    app:typeface="opensans_semibold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp" >
+
+            <ImageView
+                android:id="@+id/slider_zen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/slide_off" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/slider_zen"
+                android:orientation="vertical" >
+
+                <com.crusader.carpediem.appwatcher.views.MonkTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zen Mode"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:typeface="opensans_semibold" />
+
+                <com.crusader.carpediem.appwatcher.views.MonkTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tell me if you want me to stop monitoring"
+                    android:textColor="@color/drak_green"
+                    android:textSize="12sp"
+                    app:typeface="opensans_semibold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.crusader.carpediem.appwatcher.views.MonkTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily Limit"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:typeface="opensans_semibold" />
+
+        <SeekBar
+            android:id="@+id/daily_limit_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="8"
+            android:progress="0"
+            android:progressDrawable="@color/divider" />
+
+        <com.crusader.carpediem.appwatcher.views.MonkTextView
+            android:id="@+id/daily_limit_txtvw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="0 hr"
+            android:textColor="@color/yellow"
+            android:textSize="35sp"
+            app:typeface="opensans_regular" />
+
+        <com.crusader.carpediem.appwatcher.views.MonkTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Expect a boring hello from me when you exceed your daily limit"
+            android:textColor="@color/drak_green"
+            android:textSize="12sp"
+            app:typeface="opensans_semibold" />
+    </LinearLayout>
+
+</LinearLayout>

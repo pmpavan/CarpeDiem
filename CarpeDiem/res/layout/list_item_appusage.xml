@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:padding="5dp" >
+
+    <com.crusader.carpediem.appwatcher.views.MonkTextView
+        android:id="@+id/app_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:typeface="opensans_regular" />
+
+    <com.crusader.carpediem.appwatcher.views.MonkTextView
+        android:id="@+id/app_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="@color/yellow"
+        android:textSize="20sp"
+        app:typeface="opensans_regular" />
+
+</LinearLayout>
