@@ -16,8 +16,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -38,7 +40,7 @@ public class HomeFragment extends CommonMobileFragment implements
 
 	private View mRootView;
 
-	private int[] circleArray = { R.id.circle_1, R.id.circle_2, /* R.id.circle_3 */};
+	private int[] circleArray = { R.id.circle_1, R.id.circle_2 };
 	private ImageView[] welcomeCircles = new ImageView[4];
 
 	private ViewPager mViewPager;
@@ -127,16 +129,34 @@ public class HomeFragment extends CommonMobileFragment implements
 		settingMnu.setOnClickListener(this);
 		statsMnu.setOnClickListener(this);
 		shareMnu.setOnClickListener(this);
-		monkImg.setOnClickListener(this);
+		monkImg.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction() == MotionEvent.ACTION_DOWN){
+					monkImg.setImageResource(R.drawable.monk_wink);
+					return true;
+				} else if(event.getAction() == MotionEvent.ACTION_UP){
+					setMonkImage();
+					return true;
+				}
+				return false;
+			}
+		});
+
+		setMonkImage();
+	}
+
+	private void setMonkImage() {
 		int[] timeArray = AppUtils.calculateTime(AppUtils.getPrefs(mContext)
 				.getLong(AppConstants.SCREEN_ACTIVE_TIME, 0));
 		if (timeArray[0] < 1) {
 			monkImg.setImageResource(R.drawable.monk_smile);
 		} else if (timeArray[0] < 2) {
 			monkImg.setImageResource(R.drawable.monk_sad);
-		} else  {
+		} else {
 			monkImg.setImageResource(R.drawable.monk_dissatisfied);
-		} 
+		}
 	}
 
 	private void startBroadcastListener() {
@@ -242,8 +262,6 @@ public class HomeFragment extends CommonMobileFragment implements
 			headerEventListener.onStatsMenuClicked();
 		} else if (v == shareMnu) {
 			onShareMenuClicked();
-		} else if(v == monkImg){
-			monkImg.setImageResource(R.drawable.monk_wink);
 		}
 	}
 

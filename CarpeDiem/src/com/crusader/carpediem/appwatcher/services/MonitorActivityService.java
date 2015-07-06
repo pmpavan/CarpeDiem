@@ -20,11 +20,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
@@ -40,14 +43,13 @@ import com.crusader.carpediem.appwatcher.utils.AppUtils;
  */
 public class MonitorActivityService extends Service {
 
-	
 	private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 
 			boolean escapeFlag = AppUtils.getPrefs(context).getBoolean(
-					"ESCAPE_FLAG", false);
+					AppConstants.ESCAPE_FLAG, false);
 			if (!escapeFlag) {
 				if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
 
@@ -150,9 +152,11 @@ public class MonitorActivityService extends Service {
 		screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
 		screenStateFilter.addAction(Intent.ACTION_USER_PRESENT);
 		registerReceiver(mScreenStateReceiver, screenStateFilter);
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		Editor editor = preferences.edit();
-		editor.putString("PREVIOUS_DAY_DATA", "10:42,20:34,10:23,30:34,40:43");
+		editor.putString(AppConstants.PREVIOUS_DAY_DATA,
+				"10:42,20:34,10:23,30:34,40:43");
 		editor.commit();
 		if (!mRunning) {
 			mRunning = true;
@@ -188,7 +192,7 @@ public class MonitorActivityService extends Service {
 			public void run() {
 				getLast5DaysData();
 			}
-		//}, 0, 1000 * 3600);
+			// }, 0, 1000 * 3600);
 		}, date.getTime(), 1000 * 60 * 60 * 24 * 7);
 	}
 
@@ -200,28 +204,31 @@ public class MonitorActivityService extends Service {
 
 	public void sendNotification() {
 		getRunningAppsInfo();
-		//long dailyUserValue = AppUtils.getPrefs(this).getLong("DAILY_THRSHOLD_VALUE", 60000);
+		// long dailyUserValue =
+		// AppUtils.getPrefs(this).getLong("DAILY_THRSHOLD_VALUE", 60000);
 		long dailyUserValue = 10;
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		long currentValue = preferences.getLong(
-				"SCREEN_ACTIVE_TIME", 0);
-		Boolean alertFlag = AppUtils.getPrefs(this).getBoolean("ALERT_FLAG",
-				false);
+				AppConstants.SCREEN_ACTIVE_TIME, 0);
+		Boolean alertFlag = AppUtils.getPrefs(this).getBoolean(
+				AppConstants.ALERT_FLAG, false);
 		if (currentValue > dailyUserValue && !alertFlag) {
-			AppUtils.storeInPreferences(this, "ALERT_FLAG", true);
+			AppUtils.storeInPreferences(this, AppConstants.ALERT_FLAG, true);
 			invokeNotification();
 		} else {
-			System.out.println("Condition fails");
+			AppLogger.msg("Condition fails");
 		}
 	}
 
 	private void getLast5DaysData() {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		String previousValue = preferences.getString(
-				"PREVIOUS_DAY_DATA", "0:0,0:0,0:0,0:0,0:0");
+				AppConstants.PREVIOUS_DAY_DATA, "0:0,0:0,0:0,0:0,0:0");
 		long currentValue = AppUtils.getPrefs(this).getLong(
-				"SCREEN_ACTIVE_TIME", 0);
-		currentValue = currentValue/(60*1000);
+				AppConstants.SCREEN_ACTIVE_TIME, 0);
+		currentValue = currentValue / (60 * 1000);
 		long activeTimeinPref = preferences.getLong(
 				AppConstants.SCREEN_ON_COUNT, 0);
 		String[] previousArray = previousValue.split(",");
@@ -229,42 +236,42 @@ public class MonitorActivityService extends Service {
 		previousArray[3] = previousArray[2];
 		previousArray[2] = previousArray[1];
 		previousArray[1] = previousArray[0];
-		previousArray[0] = currentValue+":"+activeTimeinPref;
+		previousArray[0] = currentValue + ":" + activeTimeinPref;
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		Editor editor = preferences.edit();
 		String preData = "";
-		for(int i =0;i<5 ; i++)
-		{
-			if( i ==0)
-			{
+		for (int i = 0; i < 5; i++) {
+			if (i == 0) {
 				preData = previousArray[i];
 				continue;
 			}
-			preData = preData+","+previousArray[i];
+			preData = preData + "," + previousArray[i];
 		}
-		editor.putString("PREVIOUS_DAY_DATA", preData);
+		editor.putString(AppConstants.PREVIOUS_DAY_DATA, preData);
 		editor.commit();
-		//AppUtils.clearPreferenceData(this);
 	}
 
-	
-	
 	private void getRunningAppsInfo() {
 		ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		final List<ActivityManager.RunningServiceInfo> tasks = activityManager
 				.getRunningServices(Integer.MAX_VALUE);
 		try {
 			for (int i = 0; i < tasks.size(); i++) {
-				/*
-				 * PackageManager pm = this.getPackageManager(); String
-				 * foregroundTaskPackageName =
-				 * tasks.get(i).baseActivity.getPackageName(); PackageInfo
-				 * foregroundAppPackageInfo =
-				 * pm.getPackageInfo(foregroundTaskPackageName, 0);
-				 * System.out.println("Package Name ="+
-				 * foregroundAppPackageInfo.
-				 * applicationInfo.loadLabel(pm).toString());
-				 */
+
+				ActivityManager manager = (ActivityManager) this
+						.getSystemService(ACTIVITY_SERVICE);
+				List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager
+						.getRunningTasks(1);
+				ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
+				String packageName = componentInfo.getPackageName();
+				 PackageManager pm = this.getPackageManager();
+				// String foregroundTaskPackageName = tasks.get(i).baseActivity
+				// .getPackageName();
+				PackageInfo foregroundAppPackageInfo = pm.getPackageInfo(
+						packageName, 0);
+				AppLogger.msg("Package Name ="
+						+ foregroundAppPackageInfo.applicationInfo
+								.loadLabel(pm).toString());
 
 			}
 		} catch (Exception e) {
@@ -280,12 +287,27 @@ public class MonitorActivityService extends Service {
 
 		Notification n = new Notification.Builder(this)
 				.setContentTitle("Tuk Tuk Notification")
-				.setContentText("Hello- Usage limit for the day reached. Guess you won’t mind throwing me away now.")
+				.setContentText(
+						"Hello - Usage limit for the day reached. Guess you won’t mind throwing me away now.")
 				.setSmallIcon(R.drawable.monk_dissatisfied).setContentIntent(i)
 				.addAction(0, "See why", i).build();
 
 		notificationManager.notify(1, n);
 
+	}
+
+	@SuppressWarnings("deprecation")
+	public static boolean isForeground(Context ctx, String myPackage) {
+		ActivityManager manager = (ActivityManager) ctx
+				.getSystemService(ACTIVITY_SERVICE);
+		List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager
+				.getRunningTasks(1);
+
+		ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
+		if (componentInfo.getPackageName().equals(myPackage)) {
+			return true;
+		}
+		return false;
 	}
 }
 
@@ -299,10 +321,9 @@ class SimpleTask extends TimerTask {
 
 	@Override
 	public void run() {
-		System.out.println("InsideRun method");
+		AppLogger.msg("InsideRun method");
 		mservice.sendNotification();
 
 	}
-	
 
 }

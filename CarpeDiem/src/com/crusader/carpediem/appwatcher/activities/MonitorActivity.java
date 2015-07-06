@@ -7,9 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -74,7 +71,6 @@ public class MonitorActivity extends BaseActivity implements
 	private void setupControllers(Bundle savedInstanceState) {
 		if (savedInstanceState == null) {
 			showHomeFragment();
-
 		} else {
 			popAllFragmentsOnActivityStart();
 			showHomeFragment();
@@ -149,22 +145,6 @@ public class MonitorActivity extends BaseActivity implements
 				popFragment();
 			}
 		}
-	}
-
-	@SuppressLint("NewApi")
-	private void invokeNotification() {
-		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-		PendingIntent i = PendingIntent.getActivity(this, 0, new Intent(this,
-				MonitorActivity.class), 0);
-
-		Notification n = new Notification.Builder(this)
-				.setContentTitle("Tuk Tuk Notification")
-				.setContentText("Your limit has reached")
-				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(i)
-				.build();
-
-		notificationManager.notify(1, n);
 	}
 
 	@Override

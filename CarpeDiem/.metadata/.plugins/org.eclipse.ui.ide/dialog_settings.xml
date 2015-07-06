@@ -12,6 +12,7 @@
 		<item value="org.eclipse.emf.ecore:2.10.2.v20150123-0348"/>
 		<item value="org.eclipse.help:2.0.103.v20150204-1700"/>
 		<item value="org.eclipse.jgit.http.apache:3.7.1.201504261725-r"/>
+		<item value="org.eclipse.jgit.java7:3.7.1.201504261725-r"/>
 		<item value="org.eclipse.jgit.pgm:3.7.1.201504261725-r"/>
 		<item value="org.eclipse.jgit:3.7.1.201504261725-r"/>
 		<item value="org.eclipse.mylyn.commons.identity:1.6.2.v20150217-2244"/>

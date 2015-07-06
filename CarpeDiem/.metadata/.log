@@ -1957,3 +1957,168 @@ org.eclipse.core.internal.resources.ResourceException: Invalid project descripti
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
 Contains: OK
 Contains: /home/pavan/Pavan/Side-Projects/CarpeDiem overlaps the workspace location: /home/pavan/Pavan/Side-Projects/CarpeDiem
+!SESSION 2015-07-06 20:37:05.694 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Framework arguments:  -product com.android.ide.eclipse.adt.package.adtproduct
+Command-line arguments:  -data /home/pavan/Pavan/Side-Projects/CarpeDiem -os linux -ws gtk -arch x86_64 -product com.android.ide.eclipse.adt.package.adtproduct
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-07-06 20:37:12.311
+!MESSAGE --- Workbench plugin started. ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-07-06 20:37:12.359
+!MESSAGE --- Crashlytics Updater Plugin is starting ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-07-06 20:37:12.367
+!MESSAGE {internal=false, fabric=false}
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-07-06 20:37:12.368
+!MESSAGE Starting com.crashlytics.tools.eclipse.updater(1.9.0.201503102221) with location: /home/pavan/Pavan/adt-bundle-linux-x86_64-20140702/eclipse/configuration/
+	 Managed plugins version: 0.0.0
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-07-06 20:37:12.954
+!MESSAGE  OsgiBootstrapper - Installing 5 bundles from /home/pavan/Pavan/Side-Projects/CarpeDiem/.metadata/.plugins/com.crashlytics.tools.eclipse.workbench/.crashlytics_data/.bundles...
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-07-06 20:37:13.618
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.core_3.6.8.201505202122 [1804]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-07-06 20:37:14.625
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.app_3.6.8.201505202122 [1805]
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-07-06 20:37:14.659
+!MESSAGE Unable to read resource bundle file +[resources/strings/TextResource_en.properties]
+Stack trace:
+java.io.IOException: Cannot find resources/strings/TextResource_en.properties
+Cannot find resources/strings/TextResource_en.properties
+java.io.IOException: Cannot find resources/strings/TextResource_en.properties
+	at org.eclipse.core.internal.runtime.FindSupport.openStream(FindSupport.java:274)
+	at org.eclipse.core.runtime.FileLocator.openStream(FileLocator.java:188)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin$1.getResourceStream(CrashlyticsAppPlugin.java:275)
+	at com.crashlytics.tools.android.l10n.CustomCharsetControl.newBundle(CustomCharsetControl.java:39)
+	at java.util.ResourceBundle.loadBundle(ResourceBundle.java:1501)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1465)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1419)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1361)
+	at java.util.ResourceBundle.getBundle(ResourceBundle.java:815)
+	at com.crashlytics.tools.android.l10n.LocalizedStringLoader.load(LocalizedStringLoader.java:44)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin.start(CrashlyticsAppPlugin.java:144)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:936)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:319)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:412)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.loadComponents(OsgiBootstrapper.java:155)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin$1.run(UpdaterPlugin.java:104)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-07-06 20:37:14.660
+!MESSAGE Unable to read resource bundle file +[resources/strings/TextResource_en.properties]
+Stack trace:
+java.io.IOException: Cannot find resources/strings/TextResource_en.properties
+Cannot find resources/strings/TextResource_en.properties
+java.io.IOException: Cannot find resources/strings/TextResource_en.properties
+	at org.eclipse.core.internal.runtime.FindSupport.openStream(FindSupport.java:274)
+	at org.eclipse.core.runtime.FileLocator.openStream(FileLocator.java:188)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin$1.getResourceStream(CrashlyticsAppPlugin.java:275)
+	at com.crashlytics.tools.android.l10n.CustomCharsetControl.newBundle(CustomCharsetControl.java:39)
+	at java.util.ResourceBundle.loadBundle(ResourceBundle.java:1501)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1465)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1419)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1361)
+	at java.util.ResourceBundle.getBundle(ResourceBundle.java:815)
+	at com.crashlytics.tools.android.l10n.LocalizedStringLoader.load(LocalizedStringLoader.java:44)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin.start(CrashlyticsAppPlugin.java:144)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:936)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:319)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:412)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.loadComponents(OsgiBootstrapper.java:155)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin$1.run(UpdaterPlugin.java:104)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-07-06 20:37:14.662
+!MESSAGE Unable to read resource bundle file +[resources/strings/TextResource_en_IN.properties]
+Stack trace:
+java.io.IOException: Cannot find resources/strings/TextResource_en_IN.properties
+Cannot find resources/strings/TextResource_en_IN.properties
+java.io.IOException: Cannot find resources/strings/TextResource_en_IN.properties
+	at org.eclipse.core.internal.runtime.FindSupport.openStream(FindSupport.java:274)
+	at org.eclipse.core.runtime.FileLocator.openStream(FileLocator.java:188)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin$1.getResourceStream(CrashlyticsAppPlugin.java:275)
+	at com.crashlytics.tools.android.l10n.CustomCharsetControl.newBundle(CustomCharsetControl.java:39)
+	at java.util.ResourceBundle.loadBundle(ResourceBundle.java:1501)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1465)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1361)
+	at java.util.ResourceBundle.getBundle(ResourceBundle.java:815)
+	at com.crashlytics.tools.android.l10n.LocalizedStringLoader.load(LocalizedStringLoader.java:44)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin.start(CrashlyticsAppPlugin.java:144)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:936)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:319)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:412)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.loadComponents(OsgiBootstrapper.java:155)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin$1.run(UpdaterPlugin.java:104)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-07-06 20:37:14.663
+!MESSAGE Unable to read resource bundle file +[resources/strings/TextResource_en_IN.properties]
+Stack trace:
+java.io.IOException: Cannot find resources/strings/TextResource_en_IN.properties
+Cannot find resources/strings/TextResource_en_IN.properties
+java.io.IOException: Cannot find resources/strings/TextResource_en_IN.properties
+	at org.eclipse.core.internal.runtime.FindSupport.openStream(FindSupport.java:274)
+	at org.eclipse.core.runtime.FileLocator.openStream(FileLocator.java:188)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin$1.getResourceStream(CrashlyticsAppPlugin.java:275)
+	at com.crashlytics.tools.android.l10n.CustomCharsetControl.newBundle(CustomCharsetControl.java:39)
+	at java.util.ResourceBundle.loadBundle(ResourceBundle.java:1501)
+	at java.util.ResourceBundle.findBundle(ResourceBundle.java:1465)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1361)
+	at java.util.ResourceBundle.getBundle(ResourceBundle.java:815)
+	at com.crashlytics.tools.android.l10n.LocalizedStringLoader.load(LocalizedStringLoader.java:44)
+	at com.crashlytics.tools.eclipse.app.CrashlyticsAppPlugin.start(CrashlyticsAppPlugin.java:144)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:936)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:319)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:412)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.loadComponents(OsgiBootstrapper.java:155)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin$1.run(UpdaterPlugin.java:104)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-07-06 20:37:14.671
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.exporter_3.6.8.201505202122 [1807]
+
+!ENTRY org.eclipse.ui 2 2 2015-07-06 20:38:04.468
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
