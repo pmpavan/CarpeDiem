@@ -20,15 +20,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	// Database Name
 	private static final String DATABASE_NAME = "appUsageManager";
 
-	// Contacts table name
+	// App Usage table name
 	private static final String TABLE_APPUSAGE = "appUsage";
 
-	// Contacts Table Columns names
-	private static final String KEY_ID = "id";
+	// App Usage Table Columns names
 	private static final String KEY_NAME = "name";
 	private static final String KEY_PACKAGE_NAME = "package_name";
 	private static final String KEY_DURATION = "duration";
-	private final ArrayList<AppUsageIO> contact_list = new ArrayList<AppUsageIO>();
+	private final ArrayList<AppUsageIO> package_list = new ArrayList<AppUsageIO>();
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,8 +37,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_APPUSAGE_TABLE = "CREATE TABLE " + TABLE_APPUSAGE + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-				+ KEY_PACKAGE_NAME + " TEXT," + KEY_DURATION + " DOUBLE" + ")";
+				+ KEY_PACKAGE_NAME + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_DURATION + " DOUBLE" + ")";
 		db.execSQL(CREATE_APPUSAGE_TABLE);
 	}
 
@@ -59,26 +58,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void addAppUsage(AppUsageIO contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, contact.getAppName()); //  Name
-		values.put(KEY_PACKAGE_NAME, contact.getAppPackageName());  
+		values.put(KEY_PACKAGE_NAME, contact.getAppPackageName());
+		values.put(KEY_NAME, contact.getAppName()); // Name
 		values.put(KEY_DURATION, contact.getAppUsage());
 		// Inserting Row
 		db.insert(TABLE_APPUSAGE, null, values);
 		db.close(); // Closing database connection
 	}
 
-	AppUsageIO getAppUsage(int id) {
+	public AppUsageIO getAppUsage(String packageName) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query(TABLE_APPUSAGE, new String[] { KEY_ID,
-				KEY_NAME, KEY_PACKAGE_NAME , KEY_DURATION}, KEY_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
+		Cursor cursor = db.query(TABLE_APPUSAGE, new String[] {
+				KEY_PACKAGE_NAME, KEY_NAME, KEY_DURATION }, KEY_PACKAGE_NAME
+				+ "ilike ?", new String[] { packageName }, null, null, null,
+				null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
-		AppUsageIO appUsage = new AppUsageIO(Integer.parseInt(cursor
-				.getString(0)), cursor.getString(1), cursor.getString(2),
-				cursor.getDouble(3));
+		AppUsageIO appUsage = new AppUsageIO(cursor.getString(0),
+				cursor.getString(1), cursor.getDouble(2));
 		cursor.close();
 		db.close();
 
@@ -87,7 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	public ArrayList<AppUsageIO> getAppUsages() {
 		try {
-			contact_list.clear();
+			package_list.clear();
 
 			// Select All Query
 			String selectQuery = "SELECT  * FROM " + TABLE_APPUSAGE;
@@ -99,41 +98,64 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					AppUsageIO appUsageIO = new AppUsageIO();
-					appUsageIO.setId(Integer.parseInt(cursor.getString(0)));
+					appUsageIO.setAppPackageName(cursor.getString(0));
 					appUsageIO.setAppName(cursor.getString(1));
-					appUsageIO.setAppPackageName(cursor.getString(2));
-					appUsageIO.setAppUsage(cursor.getDouble(3));
-					contact_list.add(appUsageIO);
+					appUsageIO.setAppUsage(cursor.getDouble(2));
+					package_list.add(appUsageIO);
 				} while (cursor.moveToNext());
 			}
 
 			cursor.close();
 			db.close();
-			return contact_list;
+			return package_list;
 		} catch (Exception e) {
 			Log.e("all_appusages", "" + e);
 		}
 
-		return contact_list;
+		return package_list;
 	}
 
 	public int updateAppUsages(AppUsageIO appUsageIO) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, appUsageIO.getAppName()); //  Name
-		values.put(KEY_PACKAGE_NAME, appUsageIO.getAppPackageName()); 
+		values.put(KEY_PACKAGE_NAME, appUsageIO.getAppPackageName());
+		values.put(KEY_NAME, appUsageIO.getAppName()); // Name
 		values.put(KEY_DURATION, appUsageIO.getAppUsage());
-		
+
 		// updating row
-		return db.update(TABLE_APPUSAGE, values, KEY_ID + " = ?",
-				new String[] { String.valueOf(appUsageIO.getId()) });
+		return db.update(TABLE_APPUSAGE, values, KEY_PACKAGE_NAME + " ilike ?",
+				new String[] { appUsageIO.getAppPackageName() });
 	}
 
-	public void deleteAppUsages(int id) {
+	public int updateAppUsageDuration(String packageName, double duration) {
+
+		AppUsageIO appUsageIO = getAppUsage(packageName);
+
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_APPUSAGE, KEY_ID + " = ?",
-				new String[] { String.valueOf(id) });
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_DURATION, appUsageIO.getAppUsage() + duration);
+
+		// updating row
+		return db.update(TABLE_APPUSAGE, values, KEY_PACKAGE_NAME + " ilike ?",
+				new String[] { packageName });
+	}
+
+	public int resetAppUsageDuration() {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_DURATION, 0.0);
+
+		// updating row
+		return db.update(TABLE_APPUSAGE, values, "", null);
+	}
+
+	public void deleteAppUsages(String packageName) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_APPUSAGE, KEY_PACKAGE_NAME + " ilike ?",
+				new String[] { packageName });
 		db.close();
 	}
 
