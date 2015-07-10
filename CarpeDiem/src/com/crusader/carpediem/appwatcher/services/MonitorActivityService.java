@@ -15,6 +15,7 @@ import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.IBinder;
@@ -253,26 +255,19 @@ public class MonitorActivityService extends Service {
 
 	private void getRunningAppsInfo() {
 		ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		final List<ActivityManager.RunningServiceInfo> tasks = activityManager
-				.getRunningServices(Integer.MAX_VALUE);
+		final List<RunningAppProcessInfo> tasks = activityManager
+				.getRunningAppProcesses();
 		try {
-			for (int i = 0; i < tasks.size(); i++) {
-
-				ActivityManager manager = (ActivityManager) this
-						.getSystemService(ACTIVITY_SERVICE);
-				List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager
-						.getRunningTasks(1);
-				ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
-				String packageName = componentInfo.getPackageName();
-				 PackageManager pm = this.getPackageManager();
-				// String foregroundTaskPackageName = tasks.get(i).baseActivity
-				// .getPackageName();
+			if (tasks.size() > 0) {
+				PackageManager pm = getPackageManager();
+				String foregroundTaskPackageName = tasks.get(0).pkgList[0];
 				PackageInfo foregroundAppPackageInfo = pm.getPackageInfo(
-						packageName, 0);
+						foregroundTaskPackageName, 0);
 				AppLogger.msg("Package Name ="
 						+ foregroundAppPackageInfo.applicationInfo
-								.loadLabel(pm).toString());
-
+								.loadLabel(pm).toString()
+						+ " foregroundTaskPackageName "
+						+ foregroundTaskPackageName);
 			}
 		} catch (Exception e) {
 		}
@@ -296,19 +291,6 @@ public class MonitorActivityService extends Service {
 
 	}
 
-	@SuppressWarnings("deprecation")
-	public static boolean isForeground(Context ctx, String myPackage) {
-		ActivityManager manager = (ActivityManager) ctx
-				.getSystemService(ACTIVITY_SERVICE);
-		List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager
-				.getRunningTasks(1);
-
-		ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
-		if (componentInfo.getPackageName().equals(myPackage)) {
-			return true;
-		}
-		return false;
-	}
 }
 
 class SimpleTask extends TimerTask {
